@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+
+  backend:
+    container_name: backend
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 3000:3000
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - crud-db
+
+  crud-db:
+    image: postgis/postgis:13-master
+    container_name: crud-db
+    volumes:
+      - ./db/backend-db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: 'oclock'
+      POSTGRES_PASSWORD: 'passw0rd'
+      POSTGRES_DB: 'crud'
+    restart: always
+
+  studio:
+    image: timothyjmiller/prisma-studio:latest
+    container_name: studio
+    restart: unless-stopped
+    ports:
+      - 5555:5555
+    env_file:
+      - .env
+    depends_on:
+      - crud-db
