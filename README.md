@@ -2,7 +2,7 @@
 
 ## Description
 
-CRUD_NestJS is a simple CRUD application using NestJS, TypeORM, and PostgreSQL.
+CRUD_NestJS is a simple CRUD application using NestJS, Prisma, and PostgreSQL.
 
 ## Start
 
