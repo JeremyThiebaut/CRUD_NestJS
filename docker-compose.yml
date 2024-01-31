@@ -10,6 +10,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    tty: true
     depends_on:
       - crud-db
 
